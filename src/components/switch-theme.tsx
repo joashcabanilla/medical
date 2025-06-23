@@ -4,6 +4,9 @@
 import { useId } from "react";
 import { useTheme } from "next-themes";
 
+//context global state
+import { useThemeContext } from "@/context/theme";
+
 //Icons
 import { MoonIcon, SunIcon } from "lucide-react";
 
@@ -11,12 +14,9 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-interface SwitchThemeProps {
-  theme?: "light" | "dark";
-}
-
-export const SwitchTheme = ({ theme }: SwitchThemeProps) => {
+export const SwitchTheme = () => {
   const id = useId();
+  const { theme } = useThemeContext();
   const { setTheme } = useTheme();
 
   const toggleTheme = (checked: boolean) => {
@@ -45,4 +45,5 @@ export const SwitchTheme = ({ theme }: SwitchThemeProps) => {
       </Label>
     </div>
   );
+  
 };

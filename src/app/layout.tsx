@@ -5,9 +5,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { poppins, jetbrains, inter } from "@/lib/font";
 
+//context global state
+import ThemeContextProvider from "@/context/theme";
+
 export const metadata: Metadata = {
   title: {
-    default: "NOVADECI | Medical",
+    default: "NOVADECI - Medical | Sign In",
     template: "NOVADECI | %s"
   },
   description: "Developed by Joash Cabanilla"
@@ -31,7 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ThemeContextProvider>{children}</ThemeContextProvider>
         </ThemeProvider>
       </body>
     </html>
