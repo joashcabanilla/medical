@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
 //components
-import { MemberLoginLoading } from "@/components/loading";
+import { Login} from "@/components/loading";
 
 type themeState = {
   theme?: string;
@@ -23,10 +23,10 @@ export default function ThemeContextProvider({ children }: themeContextProviderP
   const [theme, setTheme] = useState<string | undefined>(undefined);
   const [mounted, setMounted] = useState<boolean>(false);
   const pathname = usePathname();
-  
+
   const loading = {
-    "/": <MemberLoginLoading />,
-    "/login/": "Loading ..."
+    "/": <Login isMember={true} />,
+    "/login/": <Login isMember={false} />
   }[pathname];
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 
 //css utils
 import { cn } from "@/lib/utils";
+import { input, inputClear, inputIcon } from "@/lib/tv/global";
 
 //schemas
 import { LoginSchema } from "@/schemas";
@@ -25,11 +26,16 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Anchor } from "@/components/ui/anchor";
 
 //Components
 import { LoginCard } from "@/components/card";
 
 export default function Login() {
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -37,19 +43,34 @@ export default function Login() {
     defaultValues: { username: "", password: "" }
   });
 
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const handleForgotPassword = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    //TODO - forgot password function
+  };
+
+  const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    //TODO - Rgister new account function
+  };
 
   const formSubmit = (data: z.infer<typeof LoginSchema>) => {
     console.log(data);
   };
 
   const handleError = (error: FieldErrors) => {
-    console.log(error);
+    const firstError = Object.keys(error)[0];
+    switch (firstError) {
+      case "username":
+        usernameRef.current?.focus();
+        break;
+      case "password":
+        passwordRef.current?.focus();
+        break;
+    }
   };
 
   return (
-    <LoginCard classname="w-[400px]">
+    <LoginCard>
       <div className="grid gap-4">
         <div>
           <h1 className="text-xl font-bold">Login to account</h1>
@@ -80,10 +101,10 @@ export default function Login() {
                             autoComplete="false"
                             disabled={false}
                             name="username"
-                            className="peer h-10 rounded-xl ps-9 indent-1 text-base font-normal"
+                            className={input()}
                           />
                         </FormControl>
-                        <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-2 peer-disabled:opacity-50">
+                        <div className={inputIcon()}>
                           <ShieldUser size={25} />
                         </div>
                       </div>
@@ -108,18 +129,17 @@ export default function Login() {
                             autoComplete="false"
                             disabled={false}
                             name="password"
-                            className="peer h-10 rounded-xl ps-10 pe-10 indent-1 text-base font-normal"
+                            className={input()}
                           />
                         </FormControl>
-                        <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-2 peer-disabled:opacity-50">
+                        <div className={inputIcon()}>
                           <Lock size={25} />
                         </div>
                         <a
                           className={cn(
-                            "text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 transition-[color,box-shadow, opacity] absolute inset-y-0 end-2 flex h-full w-9 items-center justify-center rounded-e-md delay-100 ease-[cubic-bezier(0.42,0,1,1)] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
                             field.value
-                              ? "cursor-pointer opacity-100"
-                              : "pointer-events-none opacity-0"
+                              ? inputClear({ visibility: "show" })
+                              : inputClear({ visibility: "hide" })
                           )}
                           aria-label="show password"
                           onClick={() => {
@@ -138,9 +158,32 @@ export default function Login() {
                           )}
                         </a>
                       </div>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
+                <div className="grid gap-2">
+                  <Anchor
+                    className="justify-end px-0 text-base font-bold"
+                    variant="link"
+                    onClick={handleForgotPassword}
+                  >
+                    Forgot Password?
+                  </Anchor>
+                  <Button size="lg" className="text-lg font-bold" type="submit">
+                    Sign In
+                  </Button>
+                  <p className="text-muted-foreground text-center text-base">
+                    Don&apos;t have an account yet?{" "}
+                    <Anchor
+                      variant="link"
+                      className="p-0 text-base font-bold"
+                      onClick={handleRegister}
+                    >
+                      Register here.
+                    </Anchor>
+                  </p>
+                </div>
               </div>
             </form>
           </Form>
