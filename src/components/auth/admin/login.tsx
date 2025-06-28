@@ -14,7 +14,7 @@ import { input, inputClear, inputIcon } from "@/lib/tv/global";
 import { LoginSchema } from "@/schemas";
 
 //Icons
-import { ShieldUser, Lock, Eye, EyeOff } from "lucide-react";
+import { UserRound, Lock, Eye, EyeOff } from "lucide-react";
 
 //Shadcn components
 import {
@@ -75,10 +75,7 @@ export default function Login() {
         </div>
         <div>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(formSubmit, handleError)}
-              className="w-full space-y-6"
-            >
+            <form onSubmit={form.handleSubmit(formSubmit, handleError)}>
               <div className="space-y-4">
                 <FormField
                   control={form.control}
@@ -100,7 +97,7 @@ export default function Login() {
                           />
                         </FormControl>
                         <div className={inputIcon()}>
-                          <ShieldUser size={25} />
+                          <UserRound size={25} />
                         </div>
                       </div>
                       <FormMessage />

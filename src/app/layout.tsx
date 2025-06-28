@@ -10,8 +10,8 @@ import ThemeContextProvider from "@/context/theme";
 
 export const metadata: Metadata = {
   title: {
-    default: "NOVADECI - Medical | Sign In",
-    template: "NOVADECI | %s"
+    default: "Medical | Member Login",
+    template: "Medical | %s"
   },
   description: "Developed by Joash Cabanilla"
 };

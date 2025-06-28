@@ -13,7 +13,7 @@ export const card = tv({
   base: "p-4 shadow-2xl",
   variants: {
     spacing: {
-      topbottom: "pt-8 pb-8"
+      topbottom: "pt-6 pb-6 mt-12 mb-12"
     },
     width: {
       auth: "w-[400px]"

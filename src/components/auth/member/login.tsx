@@ -5,6 +5,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FieldErrors } from "react-hook-form";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 //css utils
 import { cn } from "@/lib/utils";
@@ -14,7 +15,7 @@ import { input, inputClear, inputIcon } from "@/lib/tv/global";
 import { LoginSchema } from "@/schemas";
 
 //Icons
-import { ShieldUser, Lock, Eye, EyeOff } from "lucide-react";
+import { UserRound, Lock, Eye, EyeOff } from "lucide-react";
 
 //Shadcn components
 import {
@@ -33,6 +34,7 @@ import { Anchor } from "@/components/ui/anchor";
 import { LoginCard } from "@/components/card";
 
 export default function Login() {
+  const router = useRouter();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -50,7 +52,7 @@ export default function Login() {
 
   const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    //TODO - Rgister new account function
+    router.push("/register");
   };
 
   const formSubmit = (data: z.infer<typeof LoginSchema>) => {
@@ -72,18 +74,18 @@ export default function Login() {
   return (
     <LoginCard>
       <div className="grid gap-4">
+        {/* Form Header */}
         <div>
           <h1 className="text-xl font-bold">Login to account</h1>
           <p className="text-muted-foreground text-sm">
             Enter your credentials to access your account.
           </p>
         </div>
+
+        {/* Form Content */}
         <div>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(formSubmit, handleError)}
-              className="w-full space-y-6"
-            >
+            <form onSubmit={form.handleSubmit(formSubmit, handleError)}>
               <div className="space-y-4">
                 <FormField
                   control={form.control}
@@ -105,7 +107,7 @@ export default function Login() {
                           />
                         </FormControl>
                         <div className={inputIcon()}>
-                          <ShieldUser size={25} />
+                          <UserRound size={25} />
                         </div>
                       </div>
                       <FormMessage />
