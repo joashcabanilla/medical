@@ -182,7 +182,7 @@ export default function Login() {
                       className="p-0 text-base font-bold"
                       onClick={handleRegister}
                     >
-                      Register here.
+                      Sign Up
                     </Anchor>
                   </p>
                 </div>

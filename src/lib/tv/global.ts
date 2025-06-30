@@ -4,7 +4,10 @@ export const container = tv({
   base: "container mx-auto p-4 sm:p-6",
   variants: {
     variant: {
-      cardCenter: "flex h-full items-center justify-center"
+      cardCenter: "flex items-center justify-center"
+    },
+    height: {
+      full: "h-full"
     }
   }
 });
@@ -13,7 +16,7 @@ export const card = tv({
   base: "p-4 shadow-2xl",
   variants: {
     spacing: {
-      topbottom: "pt-6 pb-6 mt-12 mb-12"
+      topbottom: "pt-6 pb-6 mt-4 mb-4"
     },
     width: {
       auth: "w-[400px]"

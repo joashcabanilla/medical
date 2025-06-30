@@ -13,6 +13,8 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         type == "text" &&
           "h-12 rounded-2xl border-2 indent-0 text-base font-bold shadow-none disabled:opacity-100",
+        type == "email" &&
+          "h-12 rounded-2xl border-2 indent-0 text-base font-bold shadow-none disabled:opacity-100",
         type == "password" &&
           "h-12 rounded-2xl border-2 indent-0 text-base font-bold shadow-none disabled:opacity-100",
         className

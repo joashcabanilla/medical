@@ -5,6 +5,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FieldErrors } from "react-hook-form";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 //css utils
 import { cn } from "@/lib/utils";
@@ -26,13 +27,15 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Anchor } from "@/components/ui/anchor";
 
 //Components
 import { LoginCard } from "@/components/card";
 
 export default function Register() {
+  const router = useRouter();
   const memidRef = useRef<HTMLInputElement>(null);
-  const pbnoRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -45,7 +48,6 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
       memid: "",
-      pbno: "",
       email: "",
       username: "",
       password: "",
@@ -61,16 +63,26 @@ export default function Register() {
     const firstError = Object.keys(error)[0];
     switch (firstError) {
       case "memid":
-        break;
-      case "pbno":
+        memidRef.current?.focus();
         break;
       case "email":
+        emailRef.current?.focus();
+        break;
+      case "username":
+        usernameRef.current?.focus();
         break;
       case "password":
+        passwordRef.current?.focus();
         break;
       case "confirmPassword":
+        confirmPasswordRef.current?.focus();
         break;
     }
+  };
+
+  const handleSignIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    router.push("/");
   };
 
   return (
@@ -87,63 +99,35 @@ export default function Register() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(formSubmit, handleError)}>
               <div className="space-y-4">
-                <div className="flex flex-col gap-4 sm:flex-row sm:gap-2">
-                  <FormField
-                    control={form.control}
-                    name="memid"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base font-bold">Member Id</FormLabel>
-                        <div className="relative">
-                          <FormControl>
-                            <Input
-                              {...field}
-                              ref={memidRef}
-                              placeholder="Member Id"
-                              type="text"
-                              autoComplete="false"
-                              disabled={false}
-                              name="memid"
-                              className={input()}
-                            />
-                          </FormControl>
-                          <div className={inputIcon()}>
-                            <IdCard size={25} />
-                          </div>
+                <FormField
+                  control={form.control}
+                  name="memid"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base font-bold">
+                        Member Id / Passbook No.
+                      </FormLabel>
+                      <div className="relative">
+                        <FormControl>
+                          <Input
+                            {...field}
+                            ref={memidRef}
+                            placeholder="Member Id / Passbook No."
+                            type="text"
+                            autoComplete="false"
+                            disabled={false}
+                            name="memid"
+                            className={input()}
+                          />
+                        </FormControl>
+                        <div className={inputIcon()}>
+                          <IdCard size={25} />
                         </div>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="pbno"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base font-bold">Passbook No.</FormLabel>
-                        <div className="relative">
-                          <FormControl>
-                            <Input
-                              {...field}
-                              ref={pbnoRef}
-                              placeholder="Passbook No."
-                              type="text"
-                              autoComplete="false"
-                              disabled={false}
-                              name="pbno"
-                              className={input()}
-                            />
-                          </FormControl>
-                          <div className={inputIcon()}>
-                            <IdCard size={25} />
-                          </div>
-                        </div>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={form.control}
@@ -157,7 +141,7 @@ export default function Register() {
                             {...field}
                             ref={emailRef}
                             placeholder="Email"
-                            type="email"
+                            type="text"
                             autoComplete="false"
                             disabled={false}
                             name="email"
@@ -300,6 +284,22 @@ export default function Register() {
                     </FormItem>
                   )}
                 />
+
+                <div className="grid gap-2">
+                  <Button size="lg" className="text-lg font-bold" type="submit">
+                    Sign Up
+                  </Button>
+                  <p className="text-muted-foreground text-center text-base">
+                    Already have an account?{" "}
+                    <Anchor
+                      variant="link"
+                      className="p-0 text-base font-bold"
+                      onClick={handleSignIn}
+                    >
+                      Sign In
+                    </Anchor>
+                  </p>
+                </div>
               </div>
             </form>
           </Form>

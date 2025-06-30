@@ -7,8 +7,7 @@ export const LoginSchema = z.object({
 
 export const RegisterSchema = z
   .object({
-    memid: z.string().optional(),
-    pbno: z.string().optional(),
+    memid: z.string().min(1, "Member Id / Passbook No. is required."),
     email: z.string().min(1, "Email is required.").email("Please enter a valid email address."),
     username: z
       .string()
@@ -23,14 +22,10 @@ export const RegisterSchema = z
       .min(1, "Password is required.")
       .min(6, "Password must be at least 6 characters.")
       .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/,
         "Password must contain at least 1 capital letter, 1 lowercase letter, 1 number, and no spaces."
       ),
     confirmPassword: z.string().min(1, "Please confirm your password.")
-  })
-  .refine((data) => data.memid || data.pbno, {
-    message: "Either Member ID or PB No. is required.",
-    path: ["pbno"]
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match.",

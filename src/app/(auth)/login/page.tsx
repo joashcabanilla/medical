@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={container({ variant: "cardCenter" })}>
+    <div className={container({ variant: "cardCenter", height: "full" })}>
       <Login />
     </div>
   );
