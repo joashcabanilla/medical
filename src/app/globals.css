@@ -147,6 +147,6 @@
     @apply border-border outline-ring antialiased;
   }
   body {
-    @apply bg-background scrollbar-thin scrollbar-thumb-card/80 scrollbar-thumb-rounded-sm scrollbar-track-muted-foreground scrollbar-corner-secondary scrollbar-corner-rounded-sm h-dvh w-full;
+    @apply bg-background scrollbar-thin scrollbar-thumb-card/50 scrollbar-thumb-rounded-sm scrollbar-track-muted-foreground/50 scrollbar-corner-secondary scrollbar-corner-rounded-sm h-dvh w-full;
   }
 }

@@ -41,3 +41,7 @@ export const inputClear = tv({
     }
   }
 });
+
+export const noteCard = tv({
+  base: "border-primary bg-primary/3 text-accent-foreground grid gap-2 rounded-2xl border-2 border-double p-2 [&_strong]:font-extrabold font-jetbrains text-sm"
+});

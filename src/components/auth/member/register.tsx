@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 //css utils
 import { cn } from "@/lib/utils";
-import { input, inputClear, inputIcon } from "@/lib/tv/global";
+import { input, inputClear, inputIcon, noteCard } from "@/lib/tv/global";
 
 //schemas
 import { RegisterSchema } from "@/schemas";
@@ -93,7 +93,18 @@ export default function Register() {
           <h1 className="text-xl font-bold">Sign Up</h1>
           <p className="text-muted-foreground text-sm">Fill out the form below to sign up.</p>
         </div>
-
+        <div className={noteCard()}>
+          <p>
+            Example format for <strong>PB number &ldquo;001234&ldquo; no Dash(-)</strong>, kapag may
+            letra naman <strong>&ldquo;N001234&ldquo;</strong> at kung{" "}
+            <strong>Member ID &ldquo;0010000000123456&ldquo;</strong>, ang i lalagay lang ang
+            <strong> 123456</strong>
+          </p>
+          <p>
+            <strong>Note:</strong>{" "}
+            <strong>Priority ang Old Passbook sa pag verify.</strong>
+          </p>
+        </div>
         {/* Form Content */}
         <div>
           <Form {...form}>
