@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 //components
-import Register from "@/components/auth/member/register";
+import Register from "@/components/auth/register";
 
 //css utils
 import { container } from "@/lib/tv/global";

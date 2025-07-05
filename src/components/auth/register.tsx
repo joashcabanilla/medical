@@ -90,7 +90,7 @@ export default function Register() {
       <div className="grid gap-4">
         {/* Form Header */}
         <div>
-          <h1 className="text-xl font-bold">Sign Up</h1>
+          <h1 className="text-xl font-bold">Member Sign Up</h1>
           <p className="text-muted-foreground text-sm">Fill out the form below to sign up.</p>
         </div>
         <div className={noteCard()}>

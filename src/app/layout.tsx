@@ -27,6 +27,11 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrains.variable} ${poppins.variable} ${inter.className}`}
       suppressHydrationWarning
     >
+      <head>
+        <meta httpEquiv="cache-control" content="no-cache" />
+        <meta httpEquiv="pragma" content="no-cache" />
+        <meta httpEquiv="expires" content="0" />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
